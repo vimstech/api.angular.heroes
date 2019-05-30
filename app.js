@@ -6,6 +6,7 @@ const http        = require('http');
 const app = express();
 const heroes = require('./app/routes/heroes');
 const abilities = require('./app/routes/abilities');
+require('./app/database/mongodb');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '150mb' }));
