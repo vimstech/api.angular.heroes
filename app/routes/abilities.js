@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Ability = require('../models/ability').Ability;
-
+const {Ability} = require('../models/ability');
+const { Hero } = require('../models/hero');
 const localQuery = require('../../local_query').localQuery;
 
 router.get('/', localQuery, (request, response, next) => {
@@ -25,12 +25,18 @@ router.get('/', localQuery, (request, response, next) => {
 })
 
 router.post('/', localQuery, (request, response, next) => {
-  Ability.create({name: request.params.name }, (error, abilities) => {
-    if(error){
-      response.statusCode = 422
-      response.json(error);
-    }else{
-      response.json(abilities);
+  Hero.findById(request.params.hero_id).then((hero) =>  {
+    if(hero) {
+      Ability.create({name: request.params.name, hero_id: request.params.hero_id }, (error, ability) => {
+        if(error){
+          response.statusCode = 422
+          response.json(error);
+        }else{
+          hero.abilities.push(ability);
+          hero.save({})
+          response.json(ability);
+        }
+      })
     }
   })
 })

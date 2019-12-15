@@ -11,7 +11,7 @@ const abilitySchema = new Schema({
     required: true,
     default: 0
   },
-  hero: {
+  hero_id: {
     type: Schema.Types.ObjectId,
     ref: 'Hero'
   }
