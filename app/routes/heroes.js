@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const 
 const localQuery = require('../../local_query').localQuery;
 
 router.get('/', localQuery, (request, response, next) => {
@@ -8,6 +8,7 @@ router.get('/', localQuery, (request, response, next) => {
 })
 
 router.post('/', localQuery, (request, response, next) => {
+
   response.json(request.params)
 })
 

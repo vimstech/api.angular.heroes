@@ -7,6 +7,8 @@ const app = express();
 const heroes = require('./app/routes/heroes');
 const abilities = require('./app/routes/abilities');
 
+const db = require('./couchdb');
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '150mb' }));
 app.use(bodyParser.json());
@@ -40,4 +42,14 @@ const port = 3100;
 const  server = http.createServer(app);
 server.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);
+});
+
+var initCouch = require('./init_couch');
+initCouch(function(err) {  
+  if (err) {
+    throw err
+  }
+  else {
+    console.log('couchdb initialized');
+  }
 });
