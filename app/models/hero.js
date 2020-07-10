@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Ability = require('./ability').Ability;
 const heroSchema = new Schema({
   name: {
     type: String
@@ -14,5 +13,4 @@ const heroSchema = new Schema({
   timestamps: true,
 });
 const Hero = mongoose.model('Hero', heroSchema);
-
 module.exports.Hero = Hero;

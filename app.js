@@ -17,8 +17,9 @@ app.use("/api/heroes/:hero_id/abilities", abilities);
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Headers', 'Origin X-Requested-With, Content-Type, Accept');
-  next();
+  response.header('Access-Control-Allow-Credentials', true);
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 });
 
 app.use((request, response, next) => {
